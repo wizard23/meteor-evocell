@@ -4,10 +4,12 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-  api.use('underscore', ['client', 'server']);
+  api.use('underscore', ['client']);
+  api.use('jquery', ['client']);
 
-  api.export('Reactor');
-  api.export('Dish');
+  api.export('EvoCell');
+
+  api.add_files('Utils.js', 'client');
 
   api.add_files('gl/GLHelper.js', 'client');
   api.add_files('gl/Dish.js', 'client');
@@ -15,6 +17,10 @@ Package.on_use(function (api) {
   api.add_files('gl/ParticleSystem.js', 'client');
   api.add_files('gl/Palette.js', 'client');
   api.add_files('gl/Reactor.js', 'client');
+
+  api.add_files('data/FileStore.js', 'client');
+
+  api.add_files('EvoCell.js', 'client');
 });
 
 Package.on_test(function (api) {
