@@ -234,7 +234,7 @@ Reactor = (function(glhelper, Dish, Rule) {
 	}
 
 	return Reactor;
-})(GHelper, Dish, Rule);
+})(GLHelper, Dish, Rule);
 
 
 

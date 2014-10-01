@@ -103,7 +103,7 @@ Dish = (function(glhelper) {
 			}
 		}
 		// must be RGBA otherwise we cant use it as color attachment of the framebuffer
-		return .createRGBATexture(gl, width, height, new Uint8Array(pixels))
+		return createRGBATexture(gl, width, height, new Uint8Array(pixels))
 	}
 
 	function createDishTextureRandom(gl, width, height, states, density)
