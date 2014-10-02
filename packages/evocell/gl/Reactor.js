@@ -124,7 +124,10 @@ Reactor = (function(glhelper, Dish, Rule) {
 		{
 			gl.uniform1i(gl.getUniformLocation(progCA, "texRule"), 1);
 			gl.activeTexture(gl.TEXTURE1);    
-			gl.bindTexture(gl.TEXTURE_2D, rule.getTexture());	
+			gl.bindTexture(gl.TEXTURE_2D, rule.getTexture());
+
+      gl.uniform1f(gl.getUniformLocation(progCA, "XRES"), dish.width);
+      gl.uniform1f(gl.getUniformLocation(progCA, "YRES"), dish.height);
 		}
 		this.applyShaderOnDish(rule.getProgram(), dish, callback);
 	}

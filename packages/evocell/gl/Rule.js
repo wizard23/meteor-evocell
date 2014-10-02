@@ -93,15 +93,18 @@ Rule = (function(glhelper) {
 	"#endif\n" +
 	"  uniform sampler2D texFrame;\n" +
 	"  uniform sampler2D texRule;\n" +
+  "  uniform float XRES;\n" +
+  "  uniform float YRES;\n" +
 	"  \n" +
 	"  varying vec2 vTexCoord;\n" +
-	"  const float dx = 1./%XRES%., dy=1./%YRES%.;\n" +
+	//"  const float dx = 1./%XRES%., dy=1./%YRES%.;\n" +
 	"  const float stateScale = 255.;\n" +
 	"  const float states = %STATES%.;\n" +
 	"  const float width = %WIDTH%, height = %HEIGHT%;\n" +
 	"  \n" +
 	"  \n" +
 	"void main(void) {\n" +
+  " float dx = 1./XRES; float dy = 1./YRES;\n" +
 	"	float v; \n" +
 	"	float idx = 0.;\n" +
 	"   %XBLOCK% \n" +
