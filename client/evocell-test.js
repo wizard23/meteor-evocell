@@ -2,9 +2,50 @@ var camera, scene, renderer;
 var mesh;
 
 Meteor.startup(function () {
-  alert(EvoCell);
-  init();
-  animate();
+  //alert(EvoCell);
+
+  var loader = new EvoCell.ResLoader();
+  loader.load("vertexPrimitive", "shaders/primitive.vshader", "text");
+  loader.load("fragmentPrimitiveRenderer",  "shaders/primitiveRenderer.shader", "text");
+  loader.load("fragmentClear",              "shaders/clear.shader", "text");
+  loader.load("fragmentPrimitivePalette",   "shaders/primitivePalette.shader", "text");
+
+  loader.load("rule", "rules/enemy_ludwigBuildships", "text");
+
+  loader.load("rule", "rules/enemy_ludwigBuildships", "ecfile");
+  var setupFn = function (data) {
+
+    var canvas = document.getElementById('c');
+    var reactor = new EvoCell.Reactor(canvas, 300, 500);
+
+    var dish = reactor.compileDish();
+    var rule = reactor.compileRule(data["rule"], dish);
+
+    var shaders = {};
+    shaders.primitiveDraw = reactor.compileShader(data.fragmentPrimitiveRenderer);
+    shaders.clear = reactor.compileShader(data.fragmentClear);
+    shaders.mix = reactor.compileShader(data.fragmentPrimitivePalette);
+
+    var palette = new EvoCell.Palette(reactor, [
+      [0, 0, 0, 0],
+      [140, 10, 140, 255],
+      [255, 255, 255, 255],
+      [255, 30, 255, 255],
+      [255, 110, 255, 255]
+    ]);
+
+    dish.randomize(4, 0.1);
+
+    reactor.paintDish(shaders.mix, dish, dish);
+
+
+  }
+
+  loader.start(false, setupFn);
+
+
+  //init();
+  //animate();
 });
 
 
