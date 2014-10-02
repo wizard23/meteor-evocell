@@ -1,15 +1,15 @@
 <head>
   <title>EvoCell Meteor BETA</title>
 </head>
-
 <body>
+<h1>MeteorEvoCell ALPHA demo :)</h1>
   {{! > rulesList}}
   {{> ruleFileAdd}}
   <canvas id="c" style="background-color: black;"></canvas>
 </body>
 
 <template name="rulesList">
-  <div style="float:left;">
+  <div>
   {{#each rules}}
     {{> ruleItem}}
   {{/each}}

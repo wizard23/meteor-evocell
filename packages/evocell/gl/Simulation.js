@@ -1,14 +1,17 @@
 Simulation = (function(_, Reactor){
   var Simulation = function(reactor, options) {
     this.reactor = reactor;
+
     this.dishes = {};
     this.rules = {};
+    this.palettes = {};
 
-    var dishNames = option.dishes;
-    if (dishNames) {
-      this.addDishes(dishNames);
+    if (options.dishes) {
+      this.addDishes(option.dishes);
     }
-
+    if (options.rules) {
+      this.addRules(option.rules)
+    }
   }
 
   Simulation.prototype = {
@@ -34,20 +37,19 @@ Simulation = (function(_, Reactor){
           else {
             console.log("Could not load rule: " + name + " invalid ecfile! " + url);
           }
-        }
-
+        });
       };
       loader.start(false, setupFn);
     },
 
-
-    step: function() {
-
+    step: function(dish, rule) {
+      if (this.dishes.contains(dish)) {
+        dish = this.dishes[dish];
+      }
     },
 
-    render
+    renderOnCanvas: function(dishName) {
 
-
+    },
   };
-
 })(_, Reactor);
