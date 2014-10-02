@@ -47,7 +47,9 @@ GLHelper = (function() {
         if (gl.getShaderParameter(shader, gl.COMPILE_STATUS) == 0) {
             alert(gl.getShaderInfoLog(shader));
             alert(sourceText);
+          return null;
         }
+        //alert(sourceText);
         return shader;
     }
 

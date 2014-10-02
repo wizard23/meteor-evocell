@@ -1,6 +1,6 @@
-Dish = (function(glhelper) {
+ECDish = (function(glhelper) {
 	// Rules and Dishes brauchen gemeinsames Basisobjekt das eine Textur zurueckgibt
-	Dish = function(reactor, w, h)
+	var Dish = function(reactor, w, h)
 	{
 		this.gl = reactor.gl;
 		this.setSize(w, h);

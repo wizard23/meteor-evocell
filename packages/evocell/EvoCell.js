@@ -358,4 +358,4 @@ EvoCell = (function(utils, FileStore,  Reactor, Dish, Rule, Palette, ParticleSys
 		ParticleSystem: ParticleSystem,
 		ResLoader: ResLoader
 	}
-})(Utils, FileStore,  Reactor, Dish, Rule, Palette, ParticleSystem);
+})(Utils, FileStore,  Reactor, ECDish, Rule, Palette, ParticleSystem);

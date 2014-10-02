@@ -80,9 +80,11 @@ Reactor = (function(glhelper, Dish, Rule) {
 					param = param.getCurrentTexture();
 				}
 
+        /*
         if (param instanceof Palette) {
           param = param.getTexture();
         }
+        */
 
 				// distinguish types				
 				if (param instanceof WebGLTexture) {
@@ -206,15 +208,18 @@ Reactor = (function(glhelper, Dish, Rule) {
 		if (bindCallback) bindCallback(gl, shader);
 
 		if (!renderCallbac) {
-			// default arguments for all 3D shader (convention)
-			gl.bindBuffer(gl.ARRAY_BUFFER, this.posBuffer);
-			var aPosLoc = gl.getAttribLocation(shader, "aPos");
-			gl.enableVertexAttribArray( aPosLoc );
-			var aTexLoc = gl.getAttribLocation(shader, "aTexCoord");
-			gl.enableVertexAttribArray( aTexLoc );
-			gl.vertexAttribPointer(aPosLoc, 3, gl.FLOAT, gl.FALSE, 0, 0);
-			gl.vertexAttribPointer(aTexLoc, 2, gl.FLOAT, gl.FALSE, 0, this.texCoordOffset);
-			gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      // default arguments for all 3D shader (convention)
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.posBuffer);
+      var aPosLoc = gl.getAttribLocation(shader, "aPos");
+      gl.enableVertexAttribArray(aPosLoc);
+      var aTexLoc = gl.getAttribLocation(shader, "aTexCoord");
+      // bind aTexLoc if it exists (clear.shader for example does not use it)
+      if (aTexLoc >= 0) {
+        gl.enableVertexAttribArray(aTexLoc);
+        gl.vertexAttribPointer(aPosLoc, 3, gl.FLOAT, gl.FALSE, 0, 0);
+        gl.vertexAttribPointer(aTexLoc, 2, gl.FLOAT, gl.FALSE, 0, this.texCoordOffset);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
 		}
 		else 
 			renderCallbac(gl, shader);
@@ -238,7 +243,7 @@ Reactor = (function(glhelper, Dish, Rule) {
 	}
 
 	return Reactor;
-})(GLHelper, Dish, Rule);
+})(GLHelper, ECDish, Rule);
 
 
 
