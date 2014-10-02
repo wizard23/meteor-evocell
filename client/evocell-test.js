@@ -1,4 +1,5 @@
 var reactor, shaders, dish, rule, palette;
+var renderDish;
 
 
 Meteor.startup(function () {
@@ -37,14 +38,17 @@ function init() {
     reactor = new EvoCell.Reactor(canvas, width, height);
     reactor.setRenderSize(width, height);
 
-
     dish = reactor.compileDish();
+    renderDish = reactor.compileDish();
     //var rule = reactor.compileRule(data["rule"], dish);
 
     shaders = {};
     shaders.primitiveDraw = reactor.compileShader(data.fragmentPrimitiveRenderer);
     shaders.clear = reactor.compileShader(data.fragmentClear);
-    shaders.mix = reactor.compileShader(data.fragmentPrimitivePalette);
+    shaders.simplePalette = reactor.compileShader(data.fragmentPrimitivePalette);
+    shaders.palette = reactor.compileShader(data.fragmentPalette);
+
+
 
     palette = new EvoCell.Palette(reactor, [
       [0, 0, 0, 0],
@@ -56,14 +60,21 @@ function init() {
 
     setRule("rules/GameOfLife");
 
-    // single frame
-    reactor.paintDish(shaders.mix, dish, dish);
+
 
     // animation
     var mainLoop = new Utils.AnimationLoop(0, function() {
       if (rule)
         reactor.step(rule, dish);
-      reactor.paintDish(shaders.mix, dish, dish);
+      //reactor.paintDish(shaders.mix, dish, dish, {texPalette: palette.getTexture()});
+
+      //reactor.mixDish(shaders.clear, renderDish, {color: [0,0,0,255]});
+      //reactor.mixDish(shaders.palette, renderDish,
+        //{texNew: dish, texPalette: palette.getTexture()});
+
+      //reactor.paintDish(shaders.primitiveDraw, renderDish, renderDish);
+
+      reactor.paintDish(shaders.simplePalette, dish, dish);
     });
     mainLoop.start();
   }

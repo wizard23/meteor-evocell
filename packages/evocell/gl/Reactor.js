@@ -80,6 +80,10 @@ Reactor = (function(glhelper, Dish, Rule) {
 					param = param.getCurrentTexture();
 				}
 
+        if (param instanceof Palette) {
+          param = param.getTexture();
+        }
+
 				// distinguish types				
 				if (param instanceof WebGLTexture) {
 					gl.uniform1i(gl.getUniformLocation(progCA, paramName), textureCount);
