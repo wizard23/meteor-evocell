@@ -15,8 +15,13 @@ Meteor.startup(function () {
   loader.load("rule", "rules/enemy_ludwigBuildships", "ecfile");
   var setupFn = function (data) {
 
+    var width = 400;
+    var height = 200;
+
     var canvas = document.getElementById('c');
-    var reactor = new EvoCell.Reactor(canvas, 300, 500);
+    var reactor = new EvoCell.Reactor(canvas, width, height);
+    reactor.setRenderSize(width, height);
+
 
     var dish = reactor.compileDish();
     var rule = reactor.compileRule(data["rule"], dish);
@@ -36,9 +41,16 @@ Meteor.startup(function () {
 
     dish.randomize(4, 0.1);
 
+
+    // single frame
     reactor.paintDish(shaders.mix, dish, dish);
 
-
+    // animation
+    var mainLoop = new Utils.AnimationLoop(0, function() {
+      reactor.step(rule, dish);
+      reactor.paintDish(shaders.mix, dish, dish);
+    });
+    mainLoop.start();
   }
 
   loader.start(false, setupFn);

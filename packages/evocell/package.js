@@ -8,6 +8,7 @@ Package.on_use(function (api) {
   api.use('jquery', ['client']);
 
   api.export('EvoCell');
+  api.export('Utils');
 
   api.add_files('Utils.js', 'client');
 
