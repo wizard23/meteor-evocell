@@ -39,7 +39,7 @@ function init() {
   }
 
   var setupFn = function (data) {
-    var width = 400;
+    var width = 700;
     var height = 300;
 
     var canvas = document.getElementById('c');

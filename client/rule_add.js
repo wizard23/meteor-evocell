@@ -1,5 +1,5 @@
 Template.ruleFileAdd.events({
-  'submit form': function(event) {
+  'submit form': function(event, template) {
     console.log("submited");
     event.preventDefault();
     event.stopPropagation();

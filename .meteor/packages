@@ -9,3 +9,5 @@ reactive-dict
 evocell
 cfs:standard-packages
 cfs:filesystem
+iron:router
+

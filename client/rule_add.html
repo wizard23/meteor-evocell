@@ -4,10 +4,11 @@
       <input type="file" name="">
       <input type="submit" value="upload!">
   </form>
-  {{> ruleFilesList}}
 </template>
 
 <template name="ruleFilesList">
+  <h2>ruleFilesList</h2>
+    {{> ruleFileAdd}}
   <div>
     {{#each rules}}
         {{> ruleFileItem}}
