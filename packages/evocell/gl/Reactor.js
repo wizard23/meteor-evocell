@@ -166,11 +166,15 @@ Reactor = (function(glhelper, Dish, Rule) {
 
 		var gl = this.gl;
 		var shader = gl.createProgram();
-		gl.attachShader(shader, glhelper.getShader(gl, gl.VERTEX_SHADER, vertexSrc));
-		gl.attachShader(shader, glhelper.getShader(gl, gl.FRAGMENT_SHADER, fragSrc));
-		gl.linkProgram(shader);
-
-		return shader;
+    var vertexShader = glhelper.getShader(gl, gl.VERTEX_SHADER, vertexSrc);
+    var fragmentShader = glhelper.getShader(gl, gl.FRAGMENT_SHADER, fragSrc);
+    if (vertexShader && fragmentShader) {
+      gl.attachShader(shader, vertexShader);
+      gl.attachShader(shader, fragmentShader);
+      gl.linkProgram(shader);
+      return shader;
+    }
+    return null;
 	};
 
 	Reactor.prototype.compileDish = function(w, h)

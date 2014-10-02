@@ -10,8 +10,10 @@ varying vec2 vTexCoord;
 
 void main(void) {
 	vec4 color = texture2D(texFrame, vTexCoord);
+	gl_FragColor = color;
+
 	//if (mod(gl_FragCoord.x, scale) < 1. || mod(gl_FragCoord.y, scale) < 1.)
 	//	gl_FragColor = vec4(color.r*damp, color.g*damp, color.b*damp, 1.);
 	//else
-		gl_FragColor = color;
+	//	gl_FragColor = color;
 }

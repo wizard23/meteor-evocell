@@ -3,16 +3,17 @@
 </head>
 
 <body>
-  <h1>EvoCell Meteor BETA!</h1>
-  {{> rulesList}}
+  {{! > rulesList}}
   {{> ruleFileAdd}}
   <canvas id="c" style="background-color: black;"></canvas>
 </body>
 
 <template name="rulesList">
+  <div style="float:left;">
   {{#each rules}}
     {{> ruleItem}}
   {{/each}}
+  </div>
 </template>
 
 <template name="ruleItem">

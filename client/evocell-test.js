@@ -26,29 +26,10 @@ setRule = function(url) {
   }
 };
 
-/*
-function testShader(shader) {
-  if (reactor) {
-    var gl = reactor.gl;
-    gl.useProgram(shader);
-    var aTexLoc = gl.getAttribLocation(shader, "aTexCoord");
-    if (aTexLoc >= 0) {
-      console.log("shader named " + shader.name + " is valid")
-      return true;
-    }
-    else {
-      console.log("shader named " + shader.name + " is INVALID :(")
-      return false;
-    }
-  }
-  return false;
-};
-*/
-
 function init() {
   var loader = new EvoCell.ResLoader();
 
-  var usedShaderUrls = ["primitiveRenderer", "clear", "clear2", "primitivePalette", "cameraRenderer", "scroller",
+  var usedShaderUrls = ["primitiveRenderer", "clear", "primitivePalette", "cameraRenderer", "scroller",
     "drawAll", "mixPalette", "intersectSpawn"];
 
   for (var i in usedShaderUrls) {
@@ -56,13 +37,8 @@ function init() {
     var shaderFile = "shaders/" + usedShaderUrls[i] + ".shader";
     loader.load(key, shaderFile, "text");
   }
-  //loader.load("fragmentPrimitiveRenderer",  "shaders/primitiveRenderer.shader", "text");
-  //loader.load("fragmentClear",              "shaders/clear.shader", "text");
-  //loader.load("fragmentPrimitivePalette",   "shaders/primitivePalette.shader", "text");
 
-  //loader.load("rule", "rules/enemy_ludwigBuildships", "ecfile");
   var setupFn = function (data) {
-
     var width = 400;
     var height = 300;
 
@@ -72,30 +48,22 @@ function init() {
 
     dish = reactor.compileDish();
     renderDish = reactor.compileDish();
-    //var rule = reactor.compileRule(data["rule"], dish);
+    renderDish.randomize(4, 0.3);
 
     shaders = {};
     for (var i in usedShaderUrls) {
       var key = usedShaderUrls[i];
       var src = data[key];
-      shaders[key] = reactor.compileShader(src);
-      shaders[key].name = key;
+      var shader  = reactor.compileShader(src);
+      if (shader) {
+        shader.name = key;
+        shaders[key] = shader;
+      }
+      else
+      {
+        console.log("could not load shader: " + key);
+      }
     }
-    /*
-    shaders.primitiveDraw = reactor.compileShader(data.fragmentPrimitiveRenderer);
-    shaders.primitiveDraw.name = "primitiveDraw";
-    testShader(shaders.primitiveDraw);
-    alert(data.fragmentPrimitiveRenderer);
-
-    shaders.clear = reactor.compileShader(data.fragmentClear);
-    shaders.clear.name = "clear";
-    testShader(shaders.clear);
-    alert(data.fragmentClear);
-
-    shaders.simplePalette = reactor.compileShader(data.fragmentPrimitivePalette);
-    shaders.simplePalette.name = "simplePalette";
-    testShader(shaders.simplePalette);
-    */
 
 
 
@@ -104,7 +72,8 @@ function init() {
       [140, 10, 140, 255],
       [255, 255, 255, 255],
       [255, 30, 255, 255],
-      [255, 110, 255, 255]
+      [255, 110, 255, 255],
+      [0, 255, 0, 255],
     ]);
     setRule("rules/GameOfLife");
 
@@ -118,13 +87,15 @@ function init() {
 
         //reactor.step(rule, renderDish);
 
-        //reactor.mixDish(shaders.clear, renderDish, {color: [0, 0, 0, 255]});
+        //
       }
-      //reactor.paintDish(shaders.palette, renderDish, renderDish, {texNew: dish, texPalette: palette.getTexture()});
+      reactor.mixDish(shaders.clear, renderDish, {color: [0, 0, 0, 0]});
+      reactor.mixDish(shaders.mixPalette, renderDish, {texNew: dish, texPalette: palette.getTexture()});
 
-      //reactor.paintDish(shaders.primitiveDraw, dish, dish, {texPalette: palette.getTexture()});
+      reactor.paintDish(shaders.primitiveRenderer, renderDish, renderDish);
 
-      reactor.paintDish(shaders.primitivePalette, dish, dish);
+      //reactor.paintDish(shaders.primitivePalette, dish, dish);
+      //reactor.paintDish(shaders.primitivePalette, renderDish, renderDish);
     });
     mainLoop.start();
   };
