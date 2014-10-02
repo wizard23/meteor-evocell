@@ -9,8 +9,13 @@ setRule = function(url) {
   var loader = new EvoCell.ResLoader();
    loader.load("rule", url, "ecfile");
   var setupFn = function (data) {
-    rule = reactor.compileRule(data.rule, dish);
-    dish.randomize(data.rule.nrStates, 0.1);
+    if (data.rule && data.rule.containsRule) {
+      rule = reactor.compileRule(data.rule, dish);
+      dish.randomize(data.rule.nrStates, 0.1);
+    }
+    else {
+      console.log("invalid ecfile!")
+    }
   }
   loader.start(false, setupFn);
 };

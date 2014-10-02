@@ -58,8 +58,13 @@ EvoCell = (function(utils, FileStore,  Reactor, Dish, Rule, Palette, ParticleSys
 				else 
 				{
 					utils.getFromURL(ctx.queue[key], type, function(result) {
-						result = doParsing(result, givenType);
-
+            try {
+              result = doParsing(result, givenType);
+            }
+            catch(ex) {
+              console.log("ResLoader: error parsing: " + ex);
+              result = null;
+            }
 						if (useDB)
 							FileStore.storeRule(url, result);	
 

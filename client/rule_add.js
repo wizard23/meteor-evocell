@@ -46,3 +46,12 @@ Template.ruleFileItem.helpers({
     return str;
   }
 });
+
+Meteor.startup(function () {
+  Tracker.autorun(function () {
+    //alert(Session.get("activeRuleId"));
+    var activeRule = RuleFiles.findOne({_id: Session.get("activeRuleFileId")});
+    if (activeRule)
+      setRule(activeRule.url());
+  })
+});
