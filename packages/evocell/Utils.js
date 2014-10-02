@@ -74,9 +74,8 @@ Utils = (function($) {
 	}
 
 	var requestAnimFrame = (function(){
-		return  window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame ||
-		function(callback, element){ setTimeout(callback, 1000 / 60); };
+		return  window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
+      function(callback, element){ setTimeout(callback, 1000 / 60); };
 	})();
 
 	// if ms == 0 use AbimationLoop otherwise fixed timing

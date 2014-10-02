@@ -1,0 +1,21 @@
+<head>
+  <title>EvoCell Meteor BETA</title>
+</head>
+
+<body>
+  <h1>EvoCell Meteor BETA!</h1>
+  {{> rulesList}}
+  <canvas id="c"></canvas>
+</body>
+
+<template name="rulesList">
+  {{#each rules}}
+    {{> ruleItem}}
+  {{/each}}
+</template>
+
+<template name="ruleItem">
+    <div class="{{maybe_selected}}" style="border: 1px solid black;">
+        {{name}} @ <a href="{{url}}">{{url}}</a> {{maybe_selected}}
+    </div>
+</template>
