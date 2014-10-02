@@ -19,6 +19,7 @@ Template.ruleFileAdd.events({
 
 Template.ruleFilesList.helpers({
   rules: function () {
+    //return RuleFiles.find();
     return RuleFiles.find();
   }
 });
