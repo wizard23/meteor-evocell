@@ -1,7 +1,20 @@
-<template name="ruleAdd">
+<template name="ruleFileAdd">
   <form>
       <input type="text" value="describe here..">
-      <input type="file">
+      <input type="file" name="">
       <input type="submit" value="upload!">
   </form>
+  {{> ruleFilesList}}
+</template>
+
+<template name="ruleFilesList">
+    {{#each rules}}
+        {{> ruleFileItem}}
+    {{/each}}
+</template>
+
+<template name="ruleFileItem">
+  <div class="{{maybe_selected}}" style="border: 1px solid red;">
+      File: {{name}} {{debugtst}}
+  </div>
 </template>
