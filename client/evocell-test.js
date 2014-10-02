@@ -7,7 +7,7 @@ Meteor.startup(function () {
 });
 
 setRule = function(url) {
-  if (!dish) {
+  if (!reactor || !dish) {
     console.log("setRule before init!")
   }
   else {
@@ -15,7 +15,7 @@ setRule = function(url) {
     loader.load("rule", url, "ecfile");
     var setupFn = function (data) {
       if (data.rule && data.rule.containsRule) {
-        rule = reactor.compileRule(data.rule, dish);
+        rule = reactor.compileRule(data.rule);
         dish.randomize(data.rule.nrStates, 0.1);
       }
       else {

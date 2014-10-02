@@ -186,9 +186,9 @@ Reactor = (function(glhelper, Dish, Rule) {
 		return dish;
 	};
 
-	Reactor.prototype.compileRule = function(ruleData, dish)
+	Reactor.prototype.compileRule = function(ruleData)
 	{
-		var rule = new Rule(this, ruleData, dish);
+		var rule = new Rule(this, ruleData);
 		return rule;
 	};
 

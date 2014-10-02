@@ -1,21 +1,17 @@
 Rule = (function(glhelper) {
 	// RulesTexture and Dishes brauchen gemeinsames Basisobjekt das eine Textur zurueckgibt, RuleTexture ist auch ein shader
 	// public interface
-	var Rule = function(reactor, ruleData, dish)
+	var Rule = function(reactor, ruleData)
 	{
 		this.reactor = reactor;
 		this.gl = reactor.gl;
 	
 		this.setRule(ruleData);
-		// candy
-		if (dish)
-			this.setCompileSizeDish(dish);
 	};
 
 	Rule.prototype.setRule = function(ruleData)
 	{
 		this.ruleData = ruleData;
-
 
 		if (ruleData.containsRule)
 		{
@@ -32,6 +28,7 @@ Rule = (function(glhelper) {
 
 			this.invalidateProgram();
 		}
+
 		if (ruleData.containsPattern) 
 		{
 			this.patternTexture  = glhelper.createAlphaTexture(this.gl, 
@@ -43,18 +40,6 @@ Rule = (function(glhelper) {
 		return this.patternTexture;
 	};
 
-	// candy
-	Rule.prototype.setCompileSizeDish = function(dish) {
-		this.setCompileSize(dish.width, dish.height);
-	};
-
-	Rule.prototype.setCompileSize = function(w, h)
-	{
-		this.compileWidth = w;
-		this.compileHeight = h;
-
-		this.invalidateProgram();
-	};
 
 	Rule.prototype.getTexture = function()
 	{
@@ -65,12 +50,13 @@ Rule = (function(glhelper) {
 	{
 		if (this.program == null)
 		{
-			if (this.compileWidth == null || this.compileHeight == null || this.ruleData == null)
+			if (this.ruleData == null)
 			{
-				throw "You have to set the width and height and ruledata of the Rule object to compile a shader";
+				throw "You have to call setRule to compile a shader";
 			}
-		
-			this.program = this.reactor.compileShader(getFragmentShaderSourceFromEvoCellData(this.gl, this.ruleData, this.compileWidth, this.compileHeight));
+
+      var ruleShaderSrc = getFragmentShaderSourceFromEvoCellData(this.gl, this.ruleData);
+			this.program = this.reactor.compileShader(ruleShaderSrc);
 		}
 	
 		return this.program;
