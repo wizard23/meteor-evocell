@@ -5,3 +5,7 @@ Meteor.publish('ruleFiles', function() {
 Meteor.publish('rules', function() {
   return Rules.find();
 });
+
+Meteor.publish('palettes', function() {
+  return Palettes.find();
+});

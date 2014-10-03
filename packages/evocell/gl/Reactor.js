@@ -1,6 +1,11 @@
 Reactor = (function(glhelper, Dish, Rule) {
 	var Reactor = function(canvas, w, h)
 	{
+    if (!canvas) {
+      alert("canvas is needed to crate EvoCell.Reactor!");
+      return;
+    }
+
 		var gl = getGL(canvas);
 
 		var posBuffer = gl.createBuffer();
@@ -12,11 +17,16 @@ Reactor = (function(glhelper, Dish, Rule) {
 		gl.bufferSubData(gl.ARRAY_BUFFER, 0, vertices);
 		gl.bufferSubData(gl.ARRAY_BUFFER, texCoordOffset, texCoords);
 
-		this.setDefaultDishSize(w, h);		
+
 		this.canvas = canvas;
 		this.renderWidth = canvas.width;
 		this.renderHeight = canvas.height;
 		this.gl = gl;
+
+    if (!w) w = this.renderWidth;
+    if (!h) h = this.renderHeight;
+
+    this.setDefaultDishSize(w, h);
 
 		this.rules = {};
 		this.dishes = {};

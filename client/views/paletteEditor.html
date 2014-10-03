@@ -1,0 +1,15 @@
+<template name='palettesList'>
+  {{#each palettes}}
+      {{> paletteItem}}
+  {{/each}}
+</template>
+
+<template name="paletteItem">
+  <div>
+    {{name}} {{colorPreview}} <a href="xyz"></a>
+  </div>
+</template>
+
+<template name="palettePage">
+  {{> paletteItem}}
+</template>

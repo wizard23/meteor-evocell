@@ -1,10 +1,15 @@
 var reactor, shaders, dish, rule, palette;
 var renderDish;
 
-
+/*
 Meteor.startup(function () {
   init();
 });
+*/
+
+Template.webGLCanvas.rendered = function() {
+  init();
+};
 
 setRule = function(url) {
   if (!reactor || !dish) {
@@ -27,6 +32,16 @@ setRule = function(url) {
 };
 
 function init() {
+
+  var width = 800;
+  var height = 600;
+
+  var canvas = document.getElementById('c');
+  reactor = new EvoCell.Reactor(canvas, width, height);
+  if (!reactor.gl) {
+    return;
+  }
+
   var loader = new EvoCell.ResLoader();
 
   var usedShaderUrls = ["primitiveRenderer", "clear", "primitivePalette", "cameraRenderer", "scroller",
@@ -39,11 +54,9 @@ function init() {
   }
 
   var setupFn = function (data) {
-    var width = 800;
-    var height = 600;
-
-    var canvas = document.getElementById('c');
-    reactor = new EvoCell.Reactor(canvas, width, height);
+    //var canvas = document.getElementById('c');
+    //reactor = new EvoCell.Reactor(canvas, width, height);
+    reactor.setDefaultDishSize(width, height)
     reactor.setRenderSize(width, height);
 
     dish = reactor.compileDish();
