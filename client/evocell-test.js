@@ -39,8 +39,8 @@ function init() {
   }
 
   var setupFn = function (data) {
-    var width = 700;
-    var height = 300;
+    var width = 800;
+    var height = 600;
 
     var canvas = document.getElementById('c');
     reactor = new EvoCell.Reactor(canvas, width, height);

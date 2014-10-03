@@ -7,11 +7,9 @@
         <a href="{{pathFor "rulesList"}}">DB Rules</a>
       </div>
     </header>
+      {{> webGLCanvas}}
     <div id="main" class="row-fluid">
         {{> yield}}
-    </div>
-    <div id="main" class="row-fluid">
-        <canvas id="c" style="background-color: black;"></canvas>
     </div>
   </div>
 </template>
