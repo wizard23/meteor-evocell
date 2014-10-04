@@ -93,7 +93,7 @@ function init() {
 
 
     // animation
-    var mainLoop = new Utils.AnimationLoop(10, function() {
+    var mainLoop = new Utils.AnimationLoop(200, function() {
       if (rule) {
         reactor.step(rule, dish);
         //reactor.paintDish(shaders.mix, dish, dish, {texPalette: palette.getTexture()});

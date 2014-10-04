@@ -4,10 +4,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-insecure
 reactive-dict
 evocell
+iron:router
 cfs:standard-packages
 cfs:filesystem
-iron:router
+insecure
 

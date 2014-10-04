@@ -9,3 +9,7 @@ Meteor.publish('rules', function() {
 Meteor.publish('palettes', function() {
   return Palettes.find();
 });
+
+/*Meteor.publish('RuleFiles', function() {
+  return Palettes.find();
+});*/

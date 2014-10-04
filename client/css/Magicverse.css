@@ -1,12 +1,14 @@
 .selected {
     background-color: yellow;
+    border: 4px solid black;
 }
 
 .palette-item-entry {
-    padding: 2px;
+    padding: 5px;
     border: 1px solid black;
     display: inline-block;
 }
+
 
 .grid-block, .main, .post, .comments li, .comment-form {
     background: #fff;
@@ -15,6 +17,7 @@
     margin-bottom: 10px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
+
 body {
     background: #eee;
     color: #666666;
