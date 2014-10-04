@@ -6,8 +6,16 @@
 
 <template name="paletteItem">
   <div>
-    {{name}} {{colorPreview}} <a href="xyz">derive...</a>
+    {{name}}
+    {{#each colorItems}}
+      {{> paletteItemEntry}}
+    {{/each}}
+    <a href="xyz">derive...</a>
   </div>
+</template>
+
+<template name="paletteItemEntry">
+  <span class="palette-item-entry" style="background-color: {{htmlColor}}">{{index}}</span>
 </template>
 
 <template name="palettePage">

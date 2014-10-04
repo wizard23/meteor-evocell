@@ -2,6 +2,12 @@
     background-color: yellow;
 }
 
+.palette-item-entry {
+    padding: 2px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
 .grid-block, .main, .post, .comments li, .comment-form {
     background: #fff;
     border-radius: 3px;
