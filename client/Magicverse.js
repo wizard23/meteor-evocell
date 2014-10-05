@@ -2,6 +2,7 @@ if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault("counter", 0);
   Session.setDefault("activeRuleId", "");
+  Session.setDefault("activePaletteId", "");
 
   Template.rulesList.helpers({
     rules: function () {
@@ -28,6 +29,12 @@ if (Meteor.isClient) {
       var activeRule = Rules.findOne({_id: Session.get("activeRuleId")});
       if (activeRule)
         setRule(activeRule.url);
-    })
+    });
+
+    Tracker.autorun(function () {
+      var activePalette = Palettes.findOne({_id: Session.get("activePaletteId")});
+      if (activePalette)
+        setPalette(activePalette.colors);
+    });
   });
 }

@@ -2,15 +2,16 @@
   {{#each palettes}}
       {{> paletteItem}}
   {{/each}}
+  <a href="{{pathFor "palettePage"}}">new palette</a>
 </template>
 
 <template name="paletteItem">
-  <div>
+  <div class="paletteItem {{maybe_selected}}">
     {{name}}
     {{#each colorItems}}
       {{> paletteItemEntry}}
     {{/each}}
-    <a href="xyz">derive...</a>
+    <a href="{{pathFor "palettePage"}}">edit</a>
   </div>
 </template>
 
@@ -20,4 +21,5 @@
 
 <template name="palettePage">
   {{> paletteItem}}
+  Ediing page
 </template>

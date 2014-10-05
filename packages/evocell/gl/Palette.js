@@ -7,8 +7,16 @@ Palette = (function(glhelper) {
 		this.gl = reactor.gl;
 	
 
-		this.colors = colors || [];
+		this.setAllColors(colors || []);
 	};
+
+  Palette.prototype.setAllColors = function(colors) {
+    this.colors = [];
+    this.invalidateProgram();
+    for (var i in colors) {
+      this.setColor(i, colors[i]);
+    }
+  };
 
 	Palette.prototype.setColor = function(index, color)
 	{
@@ -66,7 +74,7 @@ Palette = (function(glhelper) {
 
 	Palette.prototype.invalidateProgram = function() 
 	{
-		this.ruleTexture = null;
+		this.texture = null;
 	};
 
 	return Palette;

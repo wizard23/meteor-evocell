@@ -1,7 +1,7 @@
 Template.palettesList.helpers({
   palettes: function () {
     return Palettes.find();
-  },
+  }
 });
 
 Template.paletteItem.helpers({
@@ -10,17 +10,18 @@ Template.paletteItem.helpers({
       return {color: value, index: index};
     });
   },
+  maybe_selected: function () {
+    return Session.equals("activePaletteId", this._id) ? "selected" : "";
+  }
 });
 
-/*
-function getContrastColor(c) {
-  var rgb = c.rgb();
-  var rgbContrast = _.map(rgb, function(v) {
-    return v < 128 ? 255 : 0;
-  });
-  return chroma(rgbContrast);
-}
-*/
+Template.paletteItem.events = {
+  'click .paletteItem': function() {
+    Session.set("activePaletteId", this._id);
+  }
+};
+
+
 
 function getContrastColor(c) {
   var rgb = c.rgb();

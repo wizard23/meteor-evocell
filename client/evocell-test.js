@@ -13,23 +13,31 @@ Template.webGLCanvas.rendered = function() {
 
 setRule = function(url) {
   if (!reactor || !dish) {
-    console.log("setRule before init!")
+    console.log("setRule before init!");
+    return;
   }
-  else {
-    var loader = new EvoCell.ResLoader();
-    loader.load("rule", url, "ecfile");
-    var setupFn = function (data) {
-      if (data.rule && data.rule.containsRule) {
-        rule = reactor.compileRule(data.rule);
-        dish.randomize(data.rule.nrStates, 0.1);
-      }
-      else {
-        console.log("invalid ecfile!")
-      }
+
+  var loader = new EvoCell.ResLoader();
+  loader.load("rule", url, "ecfile");
+  var setupFn = function (data) {
+    if (data.rule && data.rule.containsRule) {
+      rule = reactor.compileRule(data.rule);
+      dish.randomize(data.rule.nrStates, 0.1);
     }
-    loader.start(false, setupFn);
+    else {
+      console.log("invalid ecfile!")
+    }
   }
+  loader.start(false, setupFn);
 };
+
+setPalette = function (colors) {
+  if (!reactor || !palette) {
+    console.log("setPalette before init!")
+  }
+  console.log("setPalette" +  colors.length);
+  palette.setAllColors(colors);
+}
 
 function init() {
 
