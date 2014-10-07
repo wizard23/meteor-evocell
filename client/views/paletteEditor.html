@@ -3,6 +3,7 @@
       {{> paletteItem}}
   {{/each}}
   <a href="{{pathFor "palettePage"}}">new palette</a>
+  <a href="/palettePage/new">new palette2</a>
 </template>
 
 <template name="paletteItem">
@@ -11,6 +12,7 @@
     {{#each colorItems}}
       {{> paletteItemEntry}}
     {{/each}}
+    <button name="delte">delete</button>
     <a href="{{pathFor "palettePage"}}">edit</a>
   </div>
 </template>
@@ -20,6 +22,17 @@
 </template>
 
 <template name="palettePage">
-  {{> paletteItem}}
-  Ediing page
+  editing: {{name}}
+  {{#each colorItems}}
+    <span class="{{maybe_selected}}">
+    {{> paletteItemEntry}}
+    </span>
+  {{/each}}
+  <input type="color" name="color1">
+  <input type="color" name="color2">
+
+  <button name="deleteColor">delete Color</button>
+  <button name="addColor">add Color</button>
+
+  <input type="submit" value="save">
 </template>

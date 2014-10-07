@@ -9,6 +9,7 @@ Meteor.startup(function () {
 
 Template.webGLCanvas.rendered = function() {
   init();
+  console.log("webGLCanvas template rendered");
 };
 
 setRule = function(url) {
@@ -57,7 +58,7 @@ function init() {
 
   for (var i in usedShaderUrls) {
     var key = usedShaderUrls[i];
-    var shaderFile = "shaders/" + usedShaderUrls[i] + ".shader";
+    var shaderFile = "/shaders/" + usedShaderUrls[i] + ".shader";
     loader.load(key, shaderFile, "text");
   }
 
@@ -96,7 +97,7 @@ function init() {
       [255, 110, 255, 255],
       [0, 255, 0, 255],
     ]);
-    setRule("rules/GameOfLife");
+    setRule("/rules/GameOfLife");
 
 
 

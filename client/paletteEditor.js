@@ -1,3 +1,10 @@
+function Array2Dictionary(colors)
+{
+  return _.map(colors, function(value, index){
+    return {color: value, index: index};
+  });
+}
+
 Template.palettesList.helpers({
   palettes: function () {
     return Palettes.find();
@@ -86,3 +93,11 @@ Template.paletteItemEntry.helpers({
     return getContrastColor3(parseColor(this.color)).hex();
   }
 });
+
+Template.palettePage.events = {
+  'submit form': function (event, template) {
+    console.log("submited");
+    //event.preventDefault();
+    //event.stopPropagation();
+  }
+};
