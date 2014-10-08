@@ -34,7 +34,8 @@ setRule = function(url) {
 
 setPalette = function (colors) {
   if (!reactor || !palette) {
-    console.log("setPalette before init!")
+    console.log("setPalette before init!");
+    return;
   }
   console.log("setPalette" +  colors.length);
   palette.setAllColors(colors);

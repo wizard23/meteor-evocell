@@ -1,6 +1,5 @@
-function Array2Dictionary(colors)
-{
-  return _.map(colors, function(value, index){
+function Array2Dictionary(colors) {
+  return _.map(colors, function (value, index) {
     return {color: value, index: index};
   });
 }
@@ -12,8 +11,8 @@ Template.palettesList.helpers({
 });
 
 Template.paletteItem.helpers({
-  colorItems: function() {
-    return _.map(this.colors, function(value, index){
+  colorItems: function () {
+    return _.map(this.colors, function (value, index) {
       return {color: value, index: index};
     });
   },
@@ -23,20 +22,19 @@ Template.paletteItem.helpers({
 });
 
 Template.paletteItem.events = {
-  'click .paletteItem': function() {
+  'click .paletteItem': function () {
     Session.set("activePaletteId", this._id);
   }
 };
 
 
-
 function getContrastColor(c) {
   var rgb = c.rgb();
-  var s = _.reduce(rgb, function(m, v) {
+  var s = _.reduce(rgb, function (m, v) {
     return m + v;
   }, 0);
 
-  if (s < 128*3) {
+  if (s < 128 * 3) {
     return chroma([255, 255, 255])
   }
   return chroma([0, 0, 0]);
@@ -94,10 +92,27 @@ Template.paletteItemEntry.helpers({
   }
 });
 
+Template.palettePage.helpers({
+  colorItems: function () {
+    if (this.colors) {
+      return _.map(this.colors, function (value, index) {
+        return {color: value, index: index};
+      });
+    }
+    else {
+      return [];
+    }
+  },
+
+  maybe_selected: function () {
+    return Session.equals("activePaletteId", this._id) ? "selected" : "";
+  }
+});
+
 Template.palettePage.events = {
   'submit form': function (event, template) {
     console.log("submited");
-    //event.preventDefault();
-    //event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
   }
 };

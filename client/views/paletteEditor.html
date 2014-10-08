@@ -22,17 +22,20 @@
 </template>
 
 <template name="palettePage">
-  editing: {{name}}
-  {{#each colorItems}}
-    <span class="{{maybe_selected}}">
-    {{> paletteItemEntry}}
-    </span>
-  {{/each}}
-  <input type="color" name="color1">
-  <input type="color" name="color2">
+  <form>
+    editing: {{name}}
+    {{#each colorItems}}
+      <span class="{{maybe_selected}}">
+      {{> paletteItemEntry}}
+      </span>
+    {{/each}}
+    <br/>
+    <input type="color" name="color1">
+    <input type="color" name="color2">
 
-  <button name="deleteColor">delete Color</button>
-  <button name="addColor">add Color</button>
+    <button name="deleteColor">delete Color</button>
+    <button name="addColor">add Color</button>
 
-  <input type="submit" value="save">
+    <input type="submit" value="save">
+  </form>
 </template>
